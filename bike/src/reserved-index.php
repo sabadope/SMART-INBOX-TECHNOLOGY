@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <!-- Title -->
+    <title>home</title>
+    <link rel="icon" type="image/png" href="assets/img/fav-logo.png">
+    <!-- Plugins -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+    <!-- Styles -->
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+        * {
+        outline: none;
+        box-sizing: border-box;
+        }
+
+        :root {
+        --theme-bg-color: rgba(16 18 27 / 40%);
+        --border-color: rgba(113 119 144 / 25%);
+        --theme-color: #f9fafb;
+        --inactive-color: rgb(113 119 144 / 78%);
+        --body-font: "Poppins", sans-serif;
+        --hover-menu-bg: rgba(12 15 25 / 30%);
+        --content-title-color: #999ba5;
+        --content-bg: rgb(146 151 179 / 13%);
+        --button-inactive: rgb(249 250 251 / 55%);
+        --dropdown-bg: #21242d;
+        --dropdown-hover: rgb(42 46 60);
+        --popup-bg: rgb(22 25 37);
+        --search-bg: #14162b;
+        --overlay-bg: rgba(36, 39, 59, 0.3);
+        --scrollbar-bg: rgb(1 2 3 / 40%);
+        }
+
+        .light-mode {
+        --theme-bg-color: rgb(255 255 255 / 31%);
+        --theme-color: #3c3a3a;
+        --inactive-color: #333333;
+        --button-inactive: #3c3a3a;
+        --search-bg: rgb(255 255 255 / 31%);
+        --dropdown-bg: #f7f7f7;
+        --overlay-bg: rgb(255 255 255 / 30%);
+        --dropdown-hover: rgb(236 236 236);
+        --border-color: rgb(255 255 255 / 35%);
+        --popup-bg: rgb(255 255 255);
+        --hover-menu-bg: rgba(255 255 255 / 35%);
+        --scrollbar-bg: rgb(255 253 253 / 57%);
+        --content-title-color: --theme-color;
+        }
+
+        html {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+        font-family: var(--body-font);
+        background-image: url(https://wallpapershome.com/images/wallpapers/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 2em;
+        width: 100%;
+        height: 100vh;
+        }
+        @media screen and (max-width: 480px) {
+        body {
+            padding: 0.8em;
+        }
+        }
+
+        .video-bg {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        }
+        .video-bg video {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        img {
+        max-width: 100%;
+        }
+
+        .dark-light {
+        position: fixed;
+        bottom: 50px;
+        right: 30px;
+        background-color: var(--dropdown-bg);
+        box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.2);
+        padding: 8px;
+        border-radius: 50%;
+        z-index: 3;
+        cursor: pointer;
+        }
+        .dark-light svg {
+        width: 24px;
+        flex-shrink: 0;
+        fill: #ffce45;
+        stroke: #ffce45;
+        transition: 0.5s;
+        }
+
+        .light-mode .dark-light svg {
+        fill: transparent;
+        stroke: var(--theme-color);
+        }
+        .light-mode .profile-img {
+        border: 2px solid var(--theme-bg-color);
+        }
+        .light-mode .content-section ul {
+        background-color: var(--theme-bg-color);
+        }
+        .light-mode .pop-up__title {
+        border-color: var(--theme-color);
+        }
+        .light-mode .dropdown.is-active ul {
+        background-color: rgba(255, 255, 255, 0.94);
+        }
+
+        body.light-mode:before,
+        body.light-mode .video-bg:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.45) 100%);
+        -webkit-backdrop-filter: saturate(3);
+                backdrop-filter: saturate(3);
+        }
+
+        .app {
+        background-color: var(--theme-bg-color);
+        max-width: 1250px;
+        max-height: 860px;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        width: 100%;
+        border-radius: 14px;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        font-size: 15px;
+        font-weight: 500;
+        }
+
+        .header {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        height: 58px;
+        width: 100%;
+        border-bottom: 1px solid var(--border-color);
+        padding: 0 30px;
+        white-space: nowrap;
+        }
+        @media screen and (max-width: 480px) {
+        .header {
+            padding: 0 16px;
+        }
+        }
+        .header-menu {
+        display: flex;
+        align-items: center;
+        }
+        .header-menu a {
+        padding: 20px 30px;
+        text-decoration: none;
+        color: var(--inactive-color);
+        border-bottom: 2px solid transparent;
+        transition: 0.3s;
+        }
+        @media screen and (max-width: 610px) {
+        .header-menu a:not(.main-header-link) {
+            display: none;
+        }
+        }
+        .header-menu a.is-active, .header-menu a:hover {
+        color: var(--theme-color);
+        border-bottom: 2px solid var(--theme-color);
+        }
+
+        .notify {
+        position: relative;
+        }
+        .notify:before {
+        content: "";
+        position: absolute;
+        background-color: #3a6df0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        right: 20px;
+        top: 16px;
+        }
+        @media screen and (max-width: 1055px) {
+        .notify {
+            display: none;
+        }
+        }
+
+        .menu-circle {
+        width: 15px;
+        height: 15px;
+        background-color: #f96057;
+        border-radius: 50%;
+        box-shadow: 24px 0 0 0 #f8ce52, 48px 0 0 0 #5fcf65;
+        margin-right: 195px;
+        flex-shrink: 0;
+        }
+        @media screen and (max-width: 945px) {
+        .menu-circle {
+            display: none;
+        }
+        }
+
+        .search-bar {
+        height: 40px;
+        display: flex;
+        width: 100%;
+        max-width: 400px;
+        padding-left: 16px;
+        border-radius: 4px;
+        }
+        .search-bar input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background-color: var(--search-bg);
+        border-radius: 4px;
+        font-family: var(--body-font);
+        font-size: 15px;
+        font-weight: 500;
+        padding: 0 20px 0 40px;
+        box-shadow: 0 0 0 2px rgba(134, 140, 160, 0.02);
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56.966 56.966' fill='%23717790c7'%3e%3cpath d='M55.146 51.887L41.588 37.786A22.926 22.926 0 0046.984 23c0-12.682-10.318-23-23-23s-23 10.318-23 23 10.318 23 23 23c4.761 0 9.298-1.436 13.177-4.162l13.661 14.208c.571.593 1.339.92 2.162.92.779 0 1.518-.297 2.079-.837a3.004 3.004 0 00.083-4.242zM23.984 6c9.374 0 17 7.626 17 17s-7.626 17-17 17-17-7.626-17-17 7.626-17 17-17z'/%3e%3c/svg%3e");
+        background-size: 14px;
+        background-repeat: no-repeat;
+        background-position: 16px 48%;
+        color: var(--theme-color);
+        }
+        .search-bar input::-moz-placeholder {
+        font-family: var(--body-font);
+        color: var(--inactive-color);
+        font-size: 15px;
+        font-weight: 500;
+        }
+        .search-bar input:-ms-input-placeholder {
+        font-family: var(--body-font);
+        color: var(--inactive-color);
+        font-size: 15px;
+        font-weight: 500;
+        }
+        .search-bar input::placeholder {
+        font-family: var(--body-font);
+        color: var(--inactive-color);
+        font-size: 15px;
+        font-weight: 500;
+        }
+
+        .header-profile {
+        display: flex;
+        align-items: center;
+        padding: 0 16px 0 40px;
+        margin-left: auto;
+        flex-shrink: 0;
+        }
+        .header-profile svg {
+        width: 22px;
+        color: #f9fafb;
+        flex-shrink: 0;
+        }
+
+        .notification {
+        position: relative;
+        }
+        .notification-number {
+        position: absolute;
+        background-color: #3a6df0;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        right: -6px;
+        top: -6px;
+        }
+        .notification + svg {
+        margin-left: 22px;
+        }
+        @media screen and (max-width: 945px) {
+        .notification + svg {
+            display: none;
+        }
+        }
+
+        .profile-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        -o-object-fit: cover;
+            object-fit: cover;
+        border: 2px solid var(--theme-color);
+        margin-left: 22px;
+        }
+
+        .wide .header-menu,
+        .wide .header-profile {
+        display: none;
+        }
+        .wide .search-bar {
+        max-width: 600px;
+        margin: auto;
+        transition: 0.4s;
+        box-shadow: 0 0 0 1px var(--border-color);
+        padding-left: 0;
+        }
+        .wide .menu-circle {
+        margin-right: 0;
+        }
+
+        .wrapper {
+        display: flex;
+        flex-grow: 1;
+        overflow: hidden;
+        }
+
+        .left-side {
+        flex-basis: 240px;
+        border-right: 1px solid var(--border-color);
+        padding: 26px;
+        overflow: auto;
+        flex-shrink: 0;
+        }
+        @media screen and (max-width: 945px) {
+        .left-side {
+            display: none;
+        }
+        }
+
+        .side-wrapper + .side-wrapper {
+        margin-top: 20px;
+        }
+
+        .side-title {
+        color: var(--inactive-color);
+        margin-bottom: 14px;
+        }
+
+        .side-menu {
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+        }
+        .side-menu a {
+        text-decoration: none;
+        color: var(--theme-color);
+        display: flex;
+        align-items: center;
+        font-weight: 400;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 6px;
+        transition: 0.3s;
+        }
+        .side-menu a:hover {
+        background-color: var(--hover-menu-bg);
+        }
+        .side-menu svg {
+        width: 16px;
+        margin-right: 8px;
+        }
+
+        .updates {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin-left: auto;
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+        }
+
+        .main-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color);
+        height: 58px;
+        flex-shrink: 0;
+        }
+        .main-header .header-menu {
+        margin-left: 150px;
+        }
+        @media screen and (max-width: 1055px) {
+        .main-header .header-menu {
+            margin: auto;
+        }
+        }
+        .main-header .header-menu a {
+        padding: 20px 24px;
+        }
+
+        .main-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        }
+
+        .menu-link-main {
+        text-decoration: none;
+        color: var(--theme-color);
+        padding: 0 30px;
+        }
+        @media screen and (max-width: 1055px) {
+        .menu-link-main {
+            display: none;
+        }
+        }
+
+        .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        color: var(--theme-color);
+        padding: 20px 40px;
+        height: 100%;
+        overflow: auto;
+        background-color: var(--theme-bg-color);
+        }
+        @media screen and (max-width: 510px) {
+        .content-wrapper {
+            padding: 20px;
+        }
+        }
+        .content-wrapper-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        background-image: url("https://www.transparenttextures.com/patterns/cubes.png"), linear-gradient(to right top, #cf4af3, #e73bd7, #f631bc, #fd31a2, #ff3a8b, #ff4b78, #ff5e68, #ff705c, #ff8c51, #ffaa49, #ffc848, #ffe652);
+        border-radius: 14px;
+        padding: 20px 40px;
+        }
+        @media screen and (max-width: 415px) {
+        .content-wrapper-header {
+            padding: 20px;
+        }
+        }
+        .content-wrapper.overlay {
+        pointer-events: none;
+        transition: 0.3s;
+        background-color: var(--overlay-bg);
+        }
+
+        .overlay-app {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        pointer-events: all;
+        background-color: rgba(36, 39, 59, 0.8);
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+        }
+        .overlay-app.is-active {
+        visibility: visible;
+        opacity: 1;
+        }
+
+        .img-content {
+        font-weight: 500;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        }
+        .img-content svg {
+        width: 28px;
+        margin-right: 14px;
+        }
+
+        .content-text {
+        font-weight: 400;
+        font-size: 14px;
+        margin-top: 16px;
+        line-height: 1.7em;
+        color: #ebecec;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        }
+
+        .content-wrapper-context {
+        max-width: 350px;
+        }
+
+        .content-button {
+        background-color: #3a6df0;
+        border: none;
+        padding: 8px 26px;
+        color: #fff;
+        border-radius: 20px;
+        margin-top: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        white-space: nowrap;
+        }
+
+        .content-wrapper-img {
+        width: 186px;
+        -o-object-fit: cover;
+            object-fit: cover;
+        margin-top: -25px;
+        -o-object-position: center;
+            object-position: center;
+        }
+        @media screen and (max-width: 570px) {
+        .content-wrapper-img {
+            width: 110px;
+        }
+        }
+
+        .content-section {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        }
+        .content-section-title {
+        color: var(--content-title-color);
+        margin-bottom: 14px;
+        }
+        .content-section ul {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: space-around;
+        background-color: var(--content-bg);
+        padding-left: 0;
+        margin: 0;
+        border-radius: 14px;
+        border: 1px solid var(--theme-bg-color);
+        cursor: pointer;
+        }
+        .content-section ul li {
+        list-style: none;
+        padding: 10px 18px;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        width: 100%;
+        height: 100%;
+        white-space: nowrap;
+        transition: 0.3s;
+        }
+        .content-section ul li:hover {
+        background-color: var(--theme-bg-color);
+        }
+        .content-section ul li:hover:first-child {
+        border-radius: 13px 13px 0 0;
+        }
+        .content-section ul li:hover:last-child {
+        border-radius: 0 0 13px 13px;
+        }
+        .content-section ul li + li {
+        border-top: 1px solid var(--border-color);
+        }
+        .content-section ul svg {
+        width: 28px;
+        border-radius: 6px;
+        margin-right: 16px;
+        flex-shrink: 0;
+        }
+
+        .products {
+        display: flex;
+        align-items: center;
+        width: 150px;
+        }
+        @media screen and (max-width: 480px) {
+        .products {
+            width: 120px;
+        }
+        }
+
+        .status {
+        margin-left: auto;
+        width: 140px;
+        font-size: 15px;
+        position: relative;
+        }
+        @media screen and (max-width: 700px) {
+        .status {
+            display: none;
+        }
+        }
+        .status-circle {
+        width: 6px;
+        height: 6px;
+        background-color: #396df0;
+        position: absolute;
+        border-radius: 50%;
+        top: 4px;
+        left: -20px;
+        }
+        .status-circle.green {
+        background-color: #3bf083;
+        }
+        .status-button {
+        font-size: 15px;
+        margin-top: 0;
+        padding: 6px 24px;
+        }
+        @media screen and (max-width: 390px) {
+        .status-button {
+            padding: 6px 14px;
+        }
+        }
+        .status-button.open {
+        background: none;
+        color: var(--button-inactive);
+        border: 1px solid var(--button-inactive);
+        }
+        .status-button:not(.open):hover {
+        color: #fff;
+        border-color: #fff;
+        }
+
+        .content-button:not(.open):hover {
+        background: #1e59f1;
+        }
+
+        .menu {
+        width: 5px;
+        height: 5px;
+        background-color: var(--button-inactive);
+        border-radius: 50%;
+        box-shadow: 7px 0 0 0 var(--button-inactive), 14px 0 0 0 var(--button-inactive);
+        margin: 0 12px;
+        }
+
+        @media screen and (max-width: 415px) {
+        .adobe-product .menu {
+            display: none;
+        }
+        }
+        .dropdown {
+        position: relative;
+        height: 53px;
+        width: 40px;
+        top: -24px;
+        display: flex;
+        left: -5px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        }
+        .dropdown ul {
+        position: absolute;
+        background: var(--dropdown-bg);
+        height: 110px;
+        width: 120px;
+        right: 0;
+        top: 20px;
+        pointer-events: none;
+        opacity: 0;
+        transform: translatey(10px);
+        transition: all 0.4s ease;
+        }
+        .dropdown ul li a {
+        text-decoration: none;
+        color: var(--theme-color);
+        font-size: 12px;
+        }
+
+        .dropdown.is-active ul {
+        opacity: 1;
+        pointer-events: all;
+        transform: translatey(25px);
+        }
+        .dropdown.is-active ul li:hover {
+        background-color: var(--dropdown-hover);
+        }
+
+        .button-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 187px;
+        margin-left: auto;
+        }
+        @media screen and (max-width: 480px) {
+        .button-wrapper {
+            width: auto;
+        }
+        }
+
+        .pop-up {
+        position: absolute;
+        padding: 30px 40px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow-y: auto;
+        box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s;
+        z-index: 10;
+        background-color: var(--popup-bg);
+        width: 500px;
+        visibility: hidden;
+        opacity: 0;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        white-space: normal;
+        }
+        @media screen and (max-width: 570px) {
+        .pop-up {
+            width: 100%;
+        }
+        }
+        .pop-up.visible {
+        visibility: visible;
+        opacity: 1;
+        }
+        .pop-up__title {
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+        .pop-up__subtitle {
+        white-space: normal;
+        margin: 20px 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.8em;
+        }
+        .pop-up__subtitle a {
+        color: var(--theme-color);
+        }
+
+        .content-button-wrapper .content-button.status-button.open.close {
+        width: auto;
+        }
+
+        .content-section .close {
+        margin-right: 0;
+        width: 24px;
+        }
+
+        .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 400;
+        }
+        .checkbox-wrapper + .checkbox-wrapper {
+        margin: 20px 0 40px;
+        }
+
+        .checkbox {
+        display: none;
+        }
+
+        .checkbox + label {
+        display: flex;
+        align-items: center;
+        }
+        .checkbox + label:before {
+        content: "";
+        margin-right: 10px;
+        width: 15px;
+        height: 15px;
+        border: 1px solid var(--theme-color);
+        border-radius: 4px;
+        cursor: pointer;
+        flex-shrink: 0;
+        }
+
+        .checkbox:checked + label:before {
+        background-color: #3a6df0;
+        border-color: #3a6df0;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3e%3cpath d='M20 6L9 17l-5-5'/%3e%3c/svg%3e");
+        background-position: 50%;
+        background-size: 12px;
+        background-repeat: no-repeat;
+        }
+
+        .content-button-wrapper {
+        margin-top: auto;
+        margin-left: auto;
+        }
+        .content-button-wrapper .open {
+        margin-right: 8px;
+        }
+
+        .apps-card {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        width: calc(100% + 20px);
+        }
+
+        .app-card {
+        display: flex;
+        flex-direction: column;
+        width: calc(33.3% - 20px);
+        font-size: 16px;
+        background-color: var(--content-bg);
+        border-radius: 14px;
+        border: 1px solid var(--theme-bg-color);
+        padding: 20px;
+        cursor: pointer;
+        transition: 0.3s ease;
+        }
+        .app-card:hover {
+        transform: scale(1.02);
+        background-color: var(--theme-bg-color);
+        }
+        .app-card svg {
+        width: 28px;
+        border-radius: 6px;
+        margin-right: 12px;
+        flex-shrink: 0;
+        }
+        .app-card + .app-card {
+        margin-left: 20px;
+        }
+        .app-card span {
+        display: flex;
+        align-items: center;
+        }
+        .app-card__subtext {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.6em;
+        margin-top: 20px;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 20px;
+        }
+        .app-card-buttons {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        margin-top: 16px;
+        }
+        @media screen and (max-width: 1110px) {
+        .app-card {
+            width: calc(50% - 20px);
+        }
+        .app-card:last-child {
+            margin-top: 20px;
+            margin-left: 0px;
+        }
+        }
+        @media screen and (max-width: 565px) {
+        .app-card {
+            width: calc(100% - 20px);
+            margin-top: 20px;
+        }
+        .app-card + .app-card {
+            margin-left: 0;
+        }
+        }
+
+        ::-webkit-scrollbar {
+        width: 6px;
+        border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-bg);
+        border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container for the video background -->
+    <div class="video-bg">
+        <!-- Video element with specified dimensions, autoplay, looping, and muted -->
+        <video width="320" height="240" autoplay loop muted>
+            <!-- Source of the video file with type specified as MP4 -->
+            <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4">
+            <!-- Fallback text for browsers that do not support the video tag -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- optional features (dark toggle mode)
+        <?php
+            /* optional
+                <!-- Container for dark/light mode toggle -->
+                <div class="dark-light">
+                    <!-- SVG element for the dark/light mode icon -->
+                    <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Path element defining the shape of the icon -->
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+                </div>
+            */
+        ?>
+    -->
+
+    <div class="app">
+        <!-- optional header (center)
+            <div class="header">
+                <div class="menu-circle"></div>
+                <div class="header-menu">
+                <a class="menu-link is-active" href="#">Apps</a>
+                <a class="menu-link notify" href="#">Your work</a>
+                <a class="menu-link" href="#">Discover</a>
+                <a class="menu-link notify" href="#">Market</a>
+                </div>
+                <div class="search-bar">
+                <input type="text" placeholder="Search">
+                </div>
+                <div class="header-profile">
+                <div class="notification">
+                    <span class="notification-number">3</span>
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                    </svg>
+                </div>
+                <svg viewBox="0 0 512 512" fill="currentColor">
+                    <path d="M448.773 235.551A135.893 135.893 0 00451 211c0-74.443-60.557-135-135-135-47.52 0-91.567 25.313-115.766 65.537-32.666-10.59-66.182-6.049-93.794 12.979-27.612 19.013-44.092 49.116-45.425 82.031C24.716 253.788 0 290.497 0 331c0 7.031 1.703 13.887 3.006 20.537l.015.015C12.719 400.492 56.034 436 106 436h300c57.891 0 106-47.109 106-105 0-40.942-25.053-77.798-63.227-95.449z" />
+                </svg>
+                <img class="profile-img" src="https://images.unsplash.com/photo-1600353068440-6361ef3a86e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="">
+                </div>
+            </div>
+        -->
+
+        <!-- optional header (side)
+            <div class="wrapper">
+                <div class="left-side">
+                <div class="side-wrapper">
+                    <div class="side-title">Apps</div>
+                    <div class="side-menu">
+                    <a href="#">
+                        <svg viewBox="0 0 512 512">
+                        <g xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <path d="M0 0h128v128H0zm0 0M192 0h128v128H192zm0 0M384 0h128v128H384zm0 0M0 192h128v128H0zm0 0" data-original="#bfc9d1" />
+                        </g>
+                        <path xmlns="http://www.w3.org/2000/svg" d="M192 192h128v128H192zm0 0" fill="currentColor" data-original="#82b1ff" />
+                        <path xmlns="http://www.w3.org/2000/svg" d="M384 192h128v128H384zm0 0M0 384h128v128H0zm0 0M192 384h128v128H192zm0 0M384 384h128v128H384zm0 0" fill="currentColor" data-original="#bfc9d1" />
+                        </svg>
+                        All Apps
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 488.932 488.932" fill="currentColor">
+                        <path d="M243.158 61.361v-57.6c0-3.2 4-4.9 6.7-2.9l118.4 87c2 1.5 2 4.4 0 5.9l-118.4 87c-2.7 2-6.7.2-6.7-2.9v-57.5c-87.8 1.4-158.1 76-152.1 165.4 5.1 76.8 67.7 139.1 144.5 144 81.4 5.2 150.6-53 163-129.9 2.3-14.3 14.7-24.7 29.2-24.7 17.9 0 31.8 15.9 29 33.5-17.4 109.7-118.5 192-235.7 178.9-98-11-176.7-89.4-187.8-187.4-14.7-128.2 84.9-237.4 209.9-238.8z" />
+                        </svg>
+                        Updates
+                        <span class="notification-number updates">3</span>
+                    </a>
+                    </div>
+                </div>
+                <div class="side-wrapper">
+                    <div class="side-title">Categories</div>
+                    <div class="side-menu">
+                    <a href="#">
+                        <svg viewBox="0 0 488.455 488.455" fill="currentColor">
+                        <path d="M287.396 216.317c23.845 23.845 23.845 62.505 0 86.35s-62.505 23.845-86.35 0-23.845-62.505 0-86.35 62.505-23.845 86.35 0" />
+                        <path d="M427.397 91.581H385.21l-30.544-61.059H133.76l-30.515 61.089-42.127.075C27.533 91.746.193 119.115.164 152.715L0 396.86c0 33.675 27.384 61.074 61.059 61.074h366.338c33.675 0 61.059-27.384 61.059-61.059V152.639c-.001-33.674-27.385-61.058-61.059-61.058zM244.22 381.61c-67.335 0-122.118-54.783-122.118-122.118s54.783-122.118 122.118-122.118 122.118 54.783 122.118 122.118S311.555 381.61 244.22 381.61z" />
+                        </svg>
+                        Photography
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 512 512" fill="currentColor">
+                        <circle cx="295.099" cy="327.254" r="110.96" transform="rotate(-45 295.062 327.332)" />
+                        <path d="M471.854 338.281V163.146H296.72v41.169a123.1 123.1 0 01121.339 122.939c0 3.717-.176 7.393-.5 11.027zM172.14 327.254a123.16 123.16 0 01100.59-120.915L195.082 73.786 40.146 338.281H172.64c-.325-3.634-.5-7.31-.5-11.027z" />
+                        </svg>
+                        Graphic Design
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 58 58" fill="currentColor">
+                        <path d="M57 6H1a1 1 0 00-1 1v44a1 1 0 001 1h56a1 1 0 001-1V7a1 1 0 00-1-1zM10 50H2v-9h8v9zm0-11H2v-9h8v9zm0-11H2v-9h8v9zm0-11H2V8h8v9zm26.537 12.844l-11 7a1.007 1.007 0 01-1.018.033A1.001 1.001 0 0124 36V22a1.001 1.001 0 011.518-.857l11 7a.998.998 0 01.019 1.701zM56 50H12V8h44v42zm0-44H12V8h44v9zm-38 7H2V8h8v9z" />
+                        </svg>
+                        Film
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 469.334 469.333" fill="currentColor">
+                        <path d="M421.225 17.677L296.524 0l2.032 68.394L353.277 76.3 250.46 128l0 341.333 170.666-85.333L421.225 17.677z" />
+                        <path d="M192.874 122.168L250.46 76.3l-54.721-8.006 2.03-68.394L48.12 17.677 26.208 384l170.666 85.333 0-346.333z" />
+                        </svg>
+                        Video
+                    </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        -->
+        <div class="overlay-app"></div>
+    </div>
+
+    <!-- optional features (center-header)
+        <?php
+            /* optional
+                <div class="app">
+                    <div class="header">
+                        <div class="menu-circle"></div>
+                        <div class="header-menu">
+                        <a class="menu-link is-active" href="#">Apps</a>
+                        <a class="menu-link notify" href="#">Your work</a>
+                        <a class="menu-link" href="#">Discover</a>
+                        <a class="menu-link notify" href="#">Market</a>
+                        </div>
+                        <div class="search-bar">
+                        <input type="text" placeholder="Search">
+                        </div>
+                        <div class="header-profile">
+                        <div class="notification">
+                            <span class="notification-number">3</span>
+                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
+                            </svg>
+                        </div>
+                        <svg viewBox="0 0 512 512" fill="currentColor">
+                            <path d="M448.773 235.551A135.893 135.893 0 00451 211c0-74.443-60.557-135-135-135-47.52 0-91.567 25.313-115.766 65.537-32.666-10.59-66.182-6.049-93.794 12.979-27.612 19.013-44.092 49.116-45.425 82.031C24.716 253.788 0 290.497 0 331c0 7.031 1.703 13.887 3.006 20.537l.015.015C12.719 400.492 56.034 436 106 436h300c57.891 0 106-47.109 106-105 0-40.942-25.053-77.798-63.227-95.449z" />
+                        </svg>
+                        <img class="profile-img" src="https://images.unsplash.com/photo-1600353068440-6361ef3a86e8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="">
+                        </div>
+                    </div>
+                    <div class="wrapper">
+                        <div class="left-side">
+                        <div class="side-wrapper">
+                            <div class="side-title">Apps</div>
+                            <div class="side-menu">
+                            <a href="#">
+                                <svg viewBox="0 0 512 512">
+                                <g xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                    <path d="M0 0h128v128H0zm0 0M192 0h128v128H192zm0 0M384 0h128v128H384zm0 0M0 192h128v128H0zm0 0" data-original="#bfc9d1" />
+                                </g>
+                                <path xmlns="http://www.w3.org/2000/svg" d="M192 192h128v128H192zm0 0" fill="currentColor" data-original="#82b1ff" />
+                                <path xmlns="http://www.w3.org/2000/svg" d="M384 192h128v128H384zm0 0M0 384h128v128H0zm0 0M192 384h128v128H192zm0 0M384 384h128v128H384zm0 0" fill="currentColor" data-original="#bfc9d1" />
+                                </svg>
+                                All Apps
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 488.932 488.932" fill="currentColor">
+                                <path d="M243.158 61.361v-57.6c0-3.2 4-4.9 6.7-2.9l118.4 87c2 1.5 2 4.4 0 5.9l-118.4 87c-2.7 2-6.7.2-6.7-2.9v-57.5c-87.8 1.4-158.1 76-152.1 165.4 5.1 76.8 67.7 139.1 144.5 144 81.4 5.2 150.6-53 163-129.9 2.3-14.3 14.7-24.7 29.2-24.7 17.9 0 31.8 15.9 29 33.5-17.4 109.7-118.5 192-235.7 178.9-98-11-176.7-89.4-187.8-187.4-14.7-128.2 84.9-237.4 209.9-238.8z" />
+                                </svg>
+                                Updates
+                                <span class="notification-number updates">3</span>
+                            </a>
+                            </div>
+                        </div>
+                        <div class="side-wrapper">
+                            <div class="side-title">Categories</div>
+                            <div class="side-menu">
+                            <a href="#">
+                                <svg viewBox="0 0 488.455 488.455" fill="currentColor">
+                                <path d="M287.396 216.317c23.845 23.845 23.845 62.505 0 86.35s-62.505 23.845-86.35 0-23.845-62.505 0-86.35 62.505-23.845 86.35 0" />
+                                <path d="M427.397 91.581H385.21l-30.544-61.059H133.76l-30.515 61.089-42.127.075C27.533 91.746.193 119.115.164 152.715L0 396.86c0 33.675 27.384 61.074 61.059 61.074h366.338c33.675 0 61.059-27.384 61.059-61.059V152.639c-.001-33.674-27.385-61.058-61.059-61.058zM244.22 381.61c-67.335 0-122.118-54.783-122.118-122.118s54.783-122.118 122.118-122.118 122.118 54.783 122.118 122.118S311.555 381.61 244.22 381.61z" />
+                                </svg>
+                                Photography
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 512 512" fill="currentColor">
+                                <circle cx="295.099" cy="327.254" r="110.96" transform="rotate(-45 295.062 327.332)" />
+                                <path d="M471.854 338.281V163.146H296.72v41.169a123.1 123.1 0 01121.339 122.939c0 3.717-.176 7.393-.5 11.027zM172.14 327.254a123.16 123.16 0 01100.59-120.915L195.082 73.786 40.146 338.281H172.64c-.325-3.634-.5-7.31-.5-11.027z" />
+                                </svg>
+                                Graphic Design
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 58 58" fill="currentColor">
+                                <path d="M57 6H1a1 1 0 00-1 1v44a1 1 0 001 1h56a1 1 0 001-1V7a1 1 0 00-1-1zM10 50H2v-9h8v9zm0-11H2v-9h8v9zm0-11H2v-9h8v9zm0-11H2V8h8v9zm26.537 12.844l-11 7a1.007 1.007 0 01-1.018.033A1.001 1.001 0 0124 36V22a1.001 1.001 0 011.518-.857l11 7a.998.998 0 01.019 1.701zM56 50H12V8h44v42zm0-44H12V8h44v9zm-38 7H2V8h8v9z" />
+                                </svg>
+                                Film
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 469.334 469.333" fill="currentColor">
+                                <path d="M421.225 17.677L296.524 0l2.032 68.394L353.277 76.3 250.46 128l0 341.333 170.666-85.333L421.225 17.677z" />
+                                <path d="M192.874 122.168L250.46 76.3l-54.721-8.006 2.03-68.394L48.12 17.677 26.208 384l170.666 85.333 0-346.333z" />
+                                </svg>
+                                Video
+                            </a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="overlay-app"></div>
+                </div>
+            */
+        ?>
+    -->
+
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <!-- main js -->
+    <script>
+        $(function () {
+        $(".menu-link").click(function () {
+        $(".menu-link").removeClass("is-active");
+        $(this).addClass("is-active");
+        });
+        });
+
+        $(function () {
+        $(".main-header-link").click(function () {
+        $(".main-header-link").removeClass("is-active");
+        $(this).addClass("is-active");
+        });
+        });
+
+        const dropdowns = document.querySelectorAll(".dropdown");
+        dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdowns.forEach((c) => c.classList.remove("is-active"));
+        dropdown.classList.add("is-active");
+        });
+        });
+
+        $(".search-bar input")
+        .focus(function () {
+        $(".header").addClass("wide");
+        })
+        .blur(function () {
+        $(".header").removeClass("wide");
+        });
+
+        $(document).click(function (e) {
+        var container = $(".status-button");
+        var dd = $(".dropdown");
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+        dd.removeClass("is-active");
+        }
+        });
+
+        $(function () {
+        $(".dropdown").on("click", function (e) {
+        $(".content-wrapper").addClass("overlay");
+        e.stopPropagation();
+        });
+        $(document).on("click", function (e) {
+        if ($(e.target).is(".dropdown") === false) {
+        $(".content-wrapper").removeClass("overlay");
+        }
+        });
+        });
+
+        $(function () {
+        $(".status-button:not(.open)").on("click", function (e) {
+        $(".overlay-app").addClass("is-active");
+        });
+        $(".pop-up .close").click(function () {
+        $(".overlay-app").removeClass("is-active");
+        });
+        });
+
+        $(".status-button:not(.open)").click(function () {
+        $(".pop-up").addClass("visible");
+        });
+
+        $(".pop-up .close").click(function () {
+        $(".pop-up").removeClass("visible");
+        });
+
+        const toggleButton = document.querySelector('.dark-light');
+
+        toggleButton.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        });
+    </script>
+
+</body>
+</html>
