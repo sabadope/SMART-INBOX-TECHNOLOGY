@@ -1,0 +1,18 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background image -->
+    <item>
+        <bitmap
+            android:src="@drawable/banner3"/>
+    </item>
+
+    <!-- Rounded corners and border -->
+    <item>
+        <shape>
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="#80FFFFFF" /> <!-- Border color -->
+            <corners android:radius="16dp" /> <!-- Adjust the radius as needed -->
+        </shape>
+    </item>
+</layer-list>

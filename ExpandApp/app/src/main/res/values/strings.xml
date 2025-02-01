@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ExpandApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="hyperlink">You will begin with guided tutorials and visual demonstrations that walk you through the process of setting up the IDE and exploring its key features.. <font color="#0000FF">See more</font></string>
+    <string name="hyperlink2">You will start with guided tutorials and visual demonstrations that provide a step-by-step walkthrough for setting up the IDE and exploring its key features.. <font color="#0000FF">See more</font></string>
+    <string name="hyperlink3">Begin with engaging guided tutorials and visual demonstrations that take you through the process of installing the IDE and exploring its key functionalities.. <font color="#0000FF">See more</font></string>
+    <string name="hyperlink4">The learning journey starts with guided tutorials and visual demonstrations, designed to help you set up the IDE and understand its core features.. <font color="#0000FF">See more</font></string>
+    <string name="hyperlink5">With the help of visual demos and guided tutorials, you will first learn how to set up the IDE and explore its main features.. <font color="#0000FF">See more</font></string>
+
+</resources>

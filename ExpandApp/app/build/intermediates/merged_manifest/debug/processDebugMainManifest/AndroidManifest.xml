@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.expandapp"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="34" />
+
+    <permission
+        android:name="com.example.expandapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.expandapp.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:debuggable="true"
+        android:extractNativeLibs="false"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ExpandApp" >
+        <activity
+            android:name="com.example.expandapp.ExpertActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.HardActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.MediumActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.EasyActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.RookieActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.NewbieActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.MasterActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.AdvancedActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.FragmentPagerActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.Level5Easy"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.Level4Easy"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.Level3Easy"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.Level2Easy"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.Level1Easy"
+            android:exported="false" />
+        <activity
+            android:name="com.example.expandapp.MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="com.example.expandapp.androidx-startup"
+            android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                android:value="androidx.startup" />
+        </provider>
+
+        <receiver
+            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+            android:directBootAware="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.DUMP" >
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

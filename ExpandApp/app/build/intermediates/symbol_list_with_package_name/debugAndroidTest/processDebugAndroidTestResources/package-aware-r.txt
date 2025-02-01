@@ -1,0 +1,3 @@
+com.example.expandapp.test
+style WhiteBackgroundDialogTheme
+style WhiteBackgroundTheme

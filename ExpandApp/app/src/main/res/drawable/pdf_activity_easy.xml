@@ -1,0 +1,15 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:src="@drawable/activity_final"
+            android:gravity="center"
+            android:tileMode="disabled" />
+    </item>
+
+    <!-- Optional: Add a solid background or border -->
+    <item>
+        <shape>
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</layer-list>
